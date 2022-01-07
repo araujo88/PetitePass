@@ -47,10 +47,57 @@ def entropy_ideal(length, base=None):
 def generate_password():
     print("Please input the length of the password:")
     length = int(input())
-    if length < 8:
-        print("Error - a secure password must have at least 8 characters.")
+    if length < 1:
+        print("Error: invalid length")
     else:
-        secure_password = get_random_string(length)
+        while(True):
+            print("Please input a charset option:")
+            print("(9) - All printable characters")
+            print("(8) - All characters except accents")
+            print("(7) - All letters and numbers")
+            print("(6) - Only uppercase letters and numbers")
+            print("(5) - Only uppercase letters")
+            print("(4) - Only lowercase letters and numbers")
+            print("(3) - Only lowercase letters")
+            print("(2) - Only special characters")
+            print("(1) - Only letters")
+            print("(0) - Only numbers")
+            user_input = input()
+
+            if user_input == '9':
+                char_set = RANDOM_STRING_CHARS
+                break
+            elif user_input == '8':
+                char_set = NO_ACCENTS
+                break
+            elif user_input == '7':
+                char_set = LETTERS_AND_NUMBERS
+                break
+            elif user_input == '6':
+                char_set = UPPERCASE_AND_NUMBERS
+                break
+            elif user_input == '5':
+                char_set = ONLY_UPPERCASE
+                break
+            elif user_input == '4':
+                char_set = LOWERCASE_AND_NUMBERS
+                break
+            elif user_input == '3':
+                char_set = ONLY_LOWERCASE
+                break
+            elif user_input == '2':
+                char_set = SPECIAL_CHARS
+                break
+            elif user_input == '1':
+                char_set = ONLY_LETTERS
+                break
+            elif user_input == '0':
+                char_set = ONLY_NUMBERS
+                break
+            else:
+                print("Invalid option.")
+
+        secure_password = get_random_string(length, allowed_chars=char_set)
         print(f"Password generated: {secure_password}")
         secure_password_entropy = entropy(list(secure_password), 2)
         secure_password_max_entropy = entropy_ideal(length, 2)
