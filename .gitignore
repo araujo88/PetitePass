@@ -128,8 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-password
-passwords.db
+5f4dcc3b5aa765d61d8327deb882cf99
+48cccca3bab2ad18832233ee8dff1b0b.db
 
 SQLCipher_test
 

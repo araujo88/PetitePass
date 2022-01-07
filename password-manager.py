@@ -9,7 +9,7 @@ from database import *
 
 if __name__ == "__main__":
 
-    if not os.path.isfile('./passwords.db'):
+    if not os.path.isfile('./48cccca3bab2ad18832233ee8dff1b0b.db'):
         # Create a password database for the first time
         Password.create_table()
 

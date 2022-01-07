@@ -14,7 +14,7 @@ class Password(Model):
     updated = DateTimeField(null=True)
 
     class Meta:
-        if not os.path.isfile('./passwords.db'):
+        if not os.path.isfile('./48cccca3bab2ad18832233ee8dff1b0b.db'):
             while True:
                 while True:
                     password_input0 = getpass.getpass(
@@ -50,23 +50,24 @@ class Password(Model):
             password = str.encode(password_input)
             # Hash a password for the first time, with a randomly-generated salt
             hashed = bcrypt.hashpw(password, bcrypt.gensalt())
-            f = open("password", "w")
+            f = open("5f4dcc3b5aa765d61d8327deb882cf99", "w")
             # digest = hashlib.sha256(hashed).hexdigest()
             f.write(hashed.decode())
             f.close()
             is_auth = True
-            db = SqlCipherDatabase('passwords.db', passphrase=password_input)
+            db = SqlCipherDatabase(
+                '48cccca3bab2ad18832233ee8dff1b0b.db', passphrase=password_input)
             database = db
         else:
             password_input = getpass.getpass('Enter the database password: ')
             password = str.encode(password_input)
-            f = open("password")
+            f = open("5f4dcc3b5aa765d61d8327deb882cf99")
             hashed = str.encode(f.readline())
             # Check that an unhashed password matches one that has previously been hashed
             if bcrypt.checkpw(password, hashed):
                 print("The password entered is correct.")
                 db = SqlCipherDatabase(
-                    'passwords.db', passphrase=password_input)
+                    '48cccca3bab2ad18832233ee8dff1b0b.db', passphrase=password_input)
                 database = db
                 is_auth = True
             else:
