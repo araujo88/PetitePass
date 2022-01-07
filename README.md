@@ -12,6 +12,10 @@ Python 3.9.2
 
 `pip3 install virtualenv`
 
+### Create virtual environment
+
+`virtualenv env`
+
 ### Activate virtual environment
 
 `source env/bin/activate`
