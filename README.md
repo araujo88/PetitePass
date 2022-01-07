@@ -32,7 +32,7 @@ Python 3.9.2
 
 At first run, the program will request a password creation for managing the password database. This password must satisfy certain requirements and be entered twice. THIS PASSWORD CANNOT BE RECOVERED WITHOUT RESETTING THE DATABASE.
 
-When the password is created, two files should have been created. One stores the password salt and the other file (extension .db) stores the password database itself. IF THESE FILES ARE DELETED, ALL STORED DATA WILL BE LOST. The user can upload these files, along with the binary, in a cloud service, although this is highly discouraged. To achieve the most security, all data must be kept offline.
+When the password is created, two files should have been created. One stores the password salt (5f4dcc3b5aa765d61d8327deb882cf99) and the other file (48cccca3bab2ad18832233ee8dff1b0b.db) stores the password encrypted database itself. IF THESE FILES ARE DELETED, ALL STORED DATA WILL BE LOST. The user can upload these files, along with the binary, in a cloud service, although this is highly discouraged. To achieve the most security, all data must be kept offline.
 
 When the user is logged in, the following options are available:
 
