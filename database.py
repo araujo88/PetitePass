@@ -41,7 +41,7 @@ class Password(Model):
                 elif any(i in ONLY_UPPERCASE for i in password_input) == False:
                     print(
                         "Error: your password must contain at least one upper-case character.")
-                elif entropy_ratio < 90:
+                elif entropy_ratio < 85:
                     print("Error: your password is too simple.")
                 else:
                     break

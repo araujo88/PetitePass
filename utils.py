@@ -79,7 +79,7 @@ def verify_password():
         print("The password does not contain at least one lower-case character. The password is weak.")
     elif any(i in ONLY_UPPERCASE for i in password_check) == False:
         print("The password does not contain at least one upper-case character. The password is weak.")
-    elif ratio < 90:
+    elif ratio < 85:
         print("The password has low entropy. The password is weak.")
     else:
         print("The password is strong.")
