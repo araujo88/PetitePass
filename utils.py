@@ -106,6 +106,8 @@ def generate_password():
         print(
             f"Maximum possible Shannon entropy: {secure_password_max_entropy}")
         print(f"Entropy ratio: {round(secure_password_ratio, 2)}%")
+        if length < 8:
+            print("Warning: this password length is under 8 characters!")
 
 
 def verify_password():
