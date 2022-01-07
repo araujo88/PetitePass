@@ -10,6 +10,8 @@ ONLY_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 NO_ACCENTS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_(){[}]|/?,.!@$#&+%*<=>:;'
 SPECIAL_CHARS = """!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~'"""
 LETTERS_AND_NUMBERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+LOWERCASE_AND_NUMBERS = 'abcdefghijklmnopqrstuvwxyz0123456789'
+UPPERCASE_AND_NUMBERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 PRINTABLE_CHARS = string.printable
 RANDOM_STRING_CHARS = PRINTABLE_CHARS.translate(
     {ord(i): None for i in ' \t\n\r\x0b\x0c'})

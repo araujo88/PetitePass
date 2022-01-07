@@ -1,3 +1,7 @@
+# Todo 1: generate passwords with restricted characters
+# Todo 2: check for english words
+# Todo 3: check for common passwords
+
 import os
 from utils import *
 from playhouse.sqlcipher_ext import *
