@@ -1,0 +1,4 @@
+numpy==1.13.3
+peewee==3.14.8
+python_bcrypt==0.3.2
+sqlcipher3==0.4.5
