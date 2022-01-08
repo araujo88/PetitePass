@@ -2,6 +2,10 @@
 
 A lightweight terminal-based password manager coded with Python using SQLCipher for SQLite database encryption.
 
+## Screenshot
+
+![screenshot](Screenshot.png)
+
 ## Pre-requisites:
 
 Python 3.9.2
