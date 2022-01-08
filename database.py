@@ -3,12 +3,15 @@ import getpass
 import os
 from utils import *
 import bcrypt
+from tabulate import tabulate
+import numpy as np
 
 from playhouse.sqlcipher_ext import *
 
 
 class Password(Model):
     name = TextField()
+    username = TextField(null=True)
     password = TextField()
     timestamp = DateTimeField(default=datetime.datetime.now)
     updated = DateTimeField(null=True)
@@ -79,9 +82,12 @@ def create_password():
     try:
         print("Input the password identification name:")
         input_name = input()
+        print("Input the username (press enter if not applicable):")
+        input_username = input()
         print("Input the matching password:")
         input_password = input()
-        Password.create(name=input_name, password=input_password)
+        Password.create(name=input_name, username=input_username,
+                        password=input_password)
     except:
         print("An error occurred.")
     else:
@@ -89,13 +95,19 @@ def create_password():
 
 
 def print_passwords():
-    try:
-        print("Registered passwords:\n")
-        for password in Password.select():
-            print(
-                f"Name: {password.name} | Password: {password.password} | Created: {password.timestamp} | Updated: {password.updated}")
-    except:
-        print("An error occurred.")
+    # try:
+    print("Registered passwords:\n")
+    d = np.zeros((Password.select().count(), 5), dtype=object)
+    i = 0
+    for password in Password.select():
+        d[i, :] = [password.name, password.username, password.password,
+                   password.timestamp, password.updated]
+        i += 1
+    print(tabulate(d, headers=["Id", "Username",
+          "Password", "Created", "Updated"]))
+    #print(f"Name: {password.name} | Username: {password.username} | Password: {password.password} | Created: {password.timestamp} | Updated: {password.updated}")
+    # except:
+    #    print("An error occurred.")
 
 
 def update_password():
