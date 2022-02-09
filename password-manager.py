@@ -7,9 +7,14 @@ from utils import *
 from playhouse.sqlcipher_ext import *
 from database import *
 
+
 if __name__ == "__main__":
 
-    if not os.path.isfile('./48cccca3bab2ad18832233ee8dff1b0b.db'):
+    path = str(sys.executable)
+    path = path[0:-17]
+    #path = "." + path
+    checkpath = path + "/48cccca3bab2ad18832233ee8dff1b0b.db"
+    if not os.path.exists(checkpath):
         # Create a password database for the first time
         Password.create_table()
 
