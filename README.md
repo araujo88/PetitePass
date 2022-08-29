@@ -12,7 +12,7 @@ A lightweight terminal-based password manager coded with Python using SQLCipher 
 `make build` <br>
 `sudo make install` <br>
 
-When running for the first time, run with `sudo`:
+To start the application, run with `sudo`:
 
 `sudo password-manager`
 
