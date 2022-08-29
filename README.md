@@ -6,9 +6,19 @@ A lightweight terminal-based password manager coded with Python using SQLCipher 
 
 ![screenshot](Screenshot.png)
 
+## Getting started
+
+`make install-requirements` <br>
+`make build` <br>
+`sudo make install` <br>
+
+When running for the first time, run with `sudo`:
+
+`sudo password-manager`
+
 ## Pre-requisites:
 
-Python 3.9.2
+Python 3.10
 
 ## Building
 

@@ -19,8 +19,9 @@ class Password(Model):
 
     class Meta:
 
-        path = str(sys.executable)
-        path = path[0:-17]
+        path = "/opt/password-manager"
+        #print(path)
+        #path = path[0:-17]
         #path = "." + path
         checkpath = path + "/48cccca3bab2ad18832233ee8dff1b0b.db"
         if not os.path.exists(checkpath):
