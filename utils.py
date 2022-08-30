@@ -1,7 +1,7 @@
 import string
 import numpy as np
 import secrets
-import os, subprocess
+import os
 from sys import exit
 
 ONLY_NUMBERS = '0123456789'

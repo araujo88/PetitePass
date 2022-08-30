@@ -5,8 +5,6 @@ from utils import *
 import bcrypt
 from tabulate import tabulate
 import numpy as np
-from sys import exit
-
 from playhouse.sqlcipher_ext import *
 
 
@@ -21,10 +19,8 @@ class Password(Model):
         check_privileges()
 
         path = "/opt/password-manager"
-        #print(path)
-        #path = path[0:-17]
-        #path = "." + path
         checkpath = path + "/48cccca3bab2ad18832233ee8dff1b0b.db"
+
         if not os.path.exists(checkpath):
             while True:
                 while True:
@@ -57,13 +53,10 @@ class Password(Model):
                 else:
                     break
 
-            # Encode password
             password = str.encode(password_input)
-            # Hash a password for the first time, with a randomly-generated salt
             hashed = bcrypt.hashpw(password, bcrypt.gensalt())
             passwd_path = path + "/5f4dcc3b5aa765d61d8327deb882cf99"
             f = open(passwd_path, "w")
-            # digest = hashlib.sha256(hashed).hexdigest()
             f.write(hashed.decode())
             f.close()
             is_auth = True
@@ -76,7 +69,6 @@ class Password(Model):
             passwd_path = path + "/5f4dcc3b5aa765d61d8327deb882cf99"
             f = open(passwd_path)
             hashed = str.encode(f.readline())
-            # Check that an unhashed password matches one that has previously been hashed
             if bcrypt.checkpw(password, hashed):
                 print("The password entered is correct.")
                 database_path = path + "/48cccca3bab2ad18832233ee8dff1b0b.db"
@@ -90,19 +82,26 @@ class Password(Model):
 
 
 def create_password():
-    check_privileges()
-
     try:
-        print("Input the password identification name:")
-        input_name = input()
-        print("Input the username (press enter if not applicable):")
-        input_username = input()
-        print("Input the matching password:")
-        input_password = input()
-        Password.create(name=input_name, username=input_username,
-                        password=input_password)
-    except:
-        print("An error occurred.")
+        while True:
+            print("Input the password identification name:")
+            input_name = input()
+            print("Input the username (press enter if not applicable):")
+            input_username = input()
+            print("Input the matching password:")
+            input_password = input()
+            try:
+                if Password.get(Password.name == input_name) is not None:
+                    print("The name already exists! Please type another name for the password.")
+                else:
+                    Password.create(name=input_name, username=input_username, password=input_password)
+                    break
+            except Exception as e:
+                Password.create(name=input_name, username=input_username, password=input_password)
+                break
+    except Exception as e:
+        print("An error occurred:")
+        print(e)
     else:
         print("Password record created successfully!")
 
@@ -118,9 +117,6 @@ def print_passwords():
         i += 1
     print(tabulate(d, headers=["Id", "Username",
           "Password", "Created", "Updated"]))
-    #print(f"Name: {password.name} | Username: {password.username} | Password: {password.password} | Created: {password.timestamp} | Updated: {password.updated}")
-    # except:
-    #    print("An error occurred.")
 
 
 def update_password():
@@ -133,8 +129,9 @@ def update_password():
         password.password = new_password
         password.updated = datetime.datetime.now()
         password.save()
-    except:
-        print("An error occurred.")
+    except Exception as e:
+        print("An error occurred:")
+        print(e)
     else:
         print("Password updated successfully!")
 
@@ -145,7 +142,8 @@ def delete_password():
         input_name = input()
         password = Password.get(Password.name == input_name)
         password.delete_instance()
-    except:
-        print("An error occurred.")
+    except Exception as e:
+        print("An error occurred:")
+        print(e)
     else:
         print("Record deleted successfully!")

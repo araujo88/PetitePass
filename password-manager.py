@@ -1,7 +1,3 @@
-# Todo 1: generate passwords with restricted characters
-# Todo 2: check for english words
-# Todo 3: check for common passwords
-
 import os
 from utils import *
 from playhouse.sqlcipher_ext import *
@@ -11,12 +7,9 @@ from database import *
 if __name__ == "__main__":
 
     path = "/opt/password-manager"
-    #path = str(sys.executable)
-    #path = path[0:-17]
-    #path = "." + path
     checkpath = path + "/48cccca3bab2ad18832233ee8dff1b0b.db"
+    
     if not os.path.exists(checkpath):
-        # Create a password database for the first time
         Password.create_table()
 
     if Password._meta.is_auth:
