@@ -1,11 +1,11 @@
 import datetime
 import getpass
 import os
-import sys
 from utils import *
 import bcrypt
 from tabulate import tabulate
 import numpy as np
+from sys import exit
 
 from playhouse.sqlcipher_ext import *
 
@@ -18,6 +18,7 @@ class Password(Model):
     updated = DateTimeField(null=True)
 
     class Meta:
+        check_privileges()
 
         path = "/opt/password-manager"
         #print(path)
@@ -89,6 +90,8 @@ class Password(Model):
 
 
 def create_password():
+    check_privileges()
+
     try:
         print("Input the password identification name:")
         input_name = input()

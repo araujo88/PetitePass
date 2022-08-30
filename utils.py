@@ -1,7 +1,8 @@
 import string
 import numpy as np
 import secrets
-import os
+import os, subprocess
+from sys import exit
 
 ONLY_NUMBERS = '0123456789'
 ONLY_LETTERS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -136,3 +137,7 @@ def verify_password():
 
 def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+def check_privileges():
+    if not os.environ.get("SUDO_UID") and os.geteuid() != 0:
+        exit("You need to run this script with sudo or as root.")
