@@ -1,8 +1,11 @@
+setup:
+	virtualenv env && source env/bin/activate
+
 install-requirements:
-	virtualenv env && source env/bin/activate && pip3 install -r requirements.txt
+	pip3 install -r requirements.txt
 
 build:
-	pyinstaller --onefile --paths=/env/Lib/site-packages password-manager.py
+	pyinstaller --onefile --paths=/env/Lib/site-packages src/password-manager.py
 
 install:
 	mkdir /opt/password-manager && cp dist/password-manager /usr/bin/password-manager

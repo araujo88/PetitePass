@@ -6,8 +6,13 @@ A lightweight terminal-based password manager coded with Python using SQLCipher 
 
 ![screenshot](Screenshot.png)
 
+## Requirements
+
+`virtualenv`
+
 ## Getting started
 
+`make setup` <br>
 `make install-requirements` <br>
 `make build` <br>
 `sudo make install` <br>
@@ -79,3 +84,7 @@ Option 2 analyzes a password (string) entered by the user and outputs Shannon en
 Option 1 generates a secure password given an input length by the user and a charset.
 
 Option 0 exits the program.
+
+## TODOs
+
+Write unit tests.
