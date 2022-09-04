@@ -8,7 +8,7 @@ if __name__ == "__main__":
 
     path = "/opt/password-manager"
     checkpath = path + "/48cccca3bab2ad18832233ee8dff1b0b.db"
-    
+
     if not os.path.exists(checkpath):
         Password.create_table()
 
@@ -17,6 +17,7 @@ if __name__ == "__main__":
         while(True):
             print("\n--------------------------------")
             print("Please input the desired option:\n")
+            print("(7) - Modify database password")            
             print("(6) - List registered passwords")
             print("(5) - Register a new password record")
             print("(4) - Update a password record")
@@ -51,9 +52,12 @@ if __name__ == "__main__":
                 cls()
                 print_passwords()
 
+            elif user_input == '7':
+                cls()
+                change_db_password()
+
             elif user_input == '0':
                 cls()
-                print("Exiting program ...")
                 break
 
             else:
