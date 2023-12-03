@@ -91,8 +91,8 @@ class MainWindow(QWidget):
         # Clear existing data
         self.table.clearContents()
         self.table.setRowCount(0)
-        self.table.setColumnCount(6)  # Assuming 5 columns already exist, add 1 for buttons
-        self.table.setHorizontalHeaderLabels(["Name", "Username", "Password", "Created", "Updated", "Visibility"])
+        self.table.setColumnCount(7)
+        self.table.setHorizontalHeaderLabels(["Name", "Username", "Password", "Created", "Updated", "Visibility", "Copy"])
 
         # Fetch data from the database
         passwords = Password.select()  # assuming this fetches data from your database
@@ -120,6 +120,17 @@ class MainWindow(QWidget):
             self.table.setItem(row, 4, updatedItem)
 
             self.addPasswordButton(row, password)
+            self.addCopyButton(row, password.password)
+
+    def addCopyButton(self, row, password):
+        copyButton = QPushButton('Copy', self)
+        copyButton.clicked.connect(lambda: self.copyToClipboard(password))
+        self.table.setCellWidget(row, 6, copyButton)  # Adjust the index for your table
+
+    def copyToClipboard(self, password):
+        clipboard = QApplication.clipboard()
+        clipboard.setText(password)
+        QMessageBox.information(self, "Copied", "Password copied to clipboard!")
 
     def addPasswordButton(self, row, password):
         button = QPushButton('Show', self)
