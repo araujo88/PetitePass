@@ -9,6 +9,7 @@ class UpdatePasswordDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.initUI()
+        self.setWindowTitle("Update password entry")
 
     def initUI(self):
         layout = QFormLayout(self)

@@ -10,7 +10,8 @@ class GeneratePasswordDialog(QDialog):
         self.initUI()
         # Disable resizing, which also disables maximizing
         self.setFixedHeight(200)
-        self.setFixedWidth(400)      
+        self.setFixedWidth(400)
+        self.setWindowTitle("Generate password")
 
     def initUI(self):
         layout = QFormLayout(self)

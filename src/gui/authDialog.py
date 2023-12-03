@@ -16,7 +16,7 @@ class AuthDialog(QDialog):
         super().__init__()
         self.initUI()
         # Disable resizing, which also disables maximizing
-        self.setFixedHeight(100)
+        self.setFixedHeight(80)
         self.setFixedWidth(400)
         self.setWindowTitle("Login")
 
@@ -25,10 +25,7 @@ class AuthDialog(QDialog):
         layout = QFormLayout(self)
         self.passwordField = QLineEdit(self)
         self.passwordField.setEchoMode(QLineEdit.Password)
-        self.confirmPasswordField = QLineEdit(self)
-        self.confirmPasswordField.setEchoMode(QLineEdit.Password)
         layout.addRow(QLabel("Password:"), self.passwordField)
-        layout.addRow(QLabel("Confirm Password:"), self.confirmPasswordField)
         self.buttons = QPushButton('Login', self)
         self.buttons.clicked.connect(self.handleLogin)
         layout.addWidget(self.buttons)
@@ -61,13 +58,8 @@ class AuthDialog(QDialog):
             QMessageBox.warning(self, "Error", "Password creation was cancelled or failed.")
 
     def authenticateUser(self, checkpath, passwd_path):
-        if self.passwordField.text() != self.confirmPasswordField.text():
-            QMessageBox.warning(self, "Login Failed", "The passwords don't match.")
-            is_auth = False
-            return
-
         path = f"/home/{getpass.getuser()}/password-manager"        
-        password_input = self.confirmPasswordField.text()
+        password_input = self.passwordField.text()
         password = str.encode(password_input)
         passwd_path = path + "/5f4dcc3b5aa765d61d8327deb882cf99"
         f = open(passwd_path)

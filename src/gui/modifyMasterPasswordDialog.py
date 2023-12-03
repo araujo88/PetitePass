@@ -16,6 +16,7 @@ class ModifyMasterPasswordDialog(QDialog):
         # Disable resizing, which also disables maximizing
         self.setFixedHeight(150)
         self.setFixedWidth(400)
+        self.setWindowTitle("Modify master password")
 
     def initUI(self):
         layout = QFormLayout(self)

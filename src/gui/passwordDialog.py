@@ -8,6 +8,7 @@ class PasswordDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.initUI()
+        self.setWindowTitle("Create new password entry")        
 
     def initUI(self):
         layout = QFormLayout(self)

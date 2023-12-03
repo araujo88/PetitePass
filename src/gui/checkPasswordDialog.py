@@ -11,6 +11,7 @@ class CheckPasswordDialog(QDialog):
         # Disable resizing, which also disables maximizing
         self.setFixedHeight(200)
         self.setFixedWidth(400)
+        self.setWindowTitle("Check password strength")
 
     def initUI(self):
         self.passwordLengthLabel=QLabel("Password length:")
