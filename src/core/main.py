@@ -6,7 +6,9 @@ from database import *
 
 if __name__ == "__main__":
 
-    path = "/opt/password-manager"
+    path = f"/home/{getpass.getuser()}/password-manager"
+    if not os.path.exists(path):
+        os.makedirs(path)
     checkpath = path + "/48cccca3bab2ad18832233ee8dff1b0b.db"
 
     if not os.path.exists(checkpath):

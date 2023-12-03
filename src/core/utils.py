@@ -45,70 +45,42 @@ def entropy_ideal(length, base=None):
     return -1.0 * length * prob * np.log(prob) / np.log(base)
 
 
-def generate_password():
-    print("Please input the length of the password:")
-    length = int(input())
-    if length < 1:
-        print("Error: invalid length")
+def generate_password(userInput, length):
+    if length is None or length == "":
+        raise Exception("Error: the password length cannot be empty")
+    if length < 2:
+        raise Exception("Error: the length must be greater than 1")
+
+    if userInput == 'All printable characters':
+        char_set = RANDOM_STRING_CHARS
+    elif userInput == 'All characters except accents':
+        char_set = NO_ACCENTS
+    elif userInput == 'All letters and numbers':
+        char_set = LETTERS_AND_NUMBERS
+    elif userInput == 'Only uppercase letters and numbers':
+        char_set = UPPERCASE_AND_NUMBERS
+    elif userInput == 'Only uppercase letters':
+        char_set = ONLY_UPPERCASE
+    elif userInput == 'Only lowercase letters and numbers':
+        char_set = LOWERCASE_AND_NUMBERS
+    elif userInput == 'Only lowercase letters':
+        char_set = ONLY_LOWERCASE
+    elif userInput == 'Only special characters':
+        char_set = SPECIAL_CHARS
+    elif userInput == 'Only letters':
+        char_set = ONLY_LETTERS
+    elif userInput == 'Only numbers':
+        char_set = ONLY_NUMBERS
     else:
-        while(True):
-            print("Please input a charset option:")
-            print("(9) - All printable characters")
-            print("(8) - All characters except accents")
-            print("(7) - All letters and numbers")
-            print("(6) - Only uppercase letters and numbers")
-            print("(5) - Only uppercase letters")
-            print("(4) - Only lowercase letters and numbers")
-            print("(3) - Only lowercase letters")
-            print("(2) - Only special characters")
-            print("(1) - Only letters")
-            print("(0) - Only numbers")
-            user_input = input()
+        raise Exception("Invalid option.")
 
-            if user_input == '9':
-                char_set = RANDOM_STRING_CHARS
-                break
-            elif user_input == '8':
-                char_set = NO_ACCENTS
-                break
-            elif user_input == '7':
-                char_set = LETTERS_AND_NUMBERS
-                break
-            elif user_input == '6':
-                char_set = UPPERCASE_AND_NUMBERS
-                break
-            elif user_input == '5':
-                char_set = ONLY_UPPERCASE
-                break
-            elif user_input == '4':
-                char_set = LOWERCASE_AND_NUMBERS
-                break
-            elif user_input == '3':
-                char_set = ONLY_LOWERCASE
-                break
-            elif user_input == '2':
-                char_set = SPECIAL_CHARS
-                break
-            elif user_input == '1':
-                char_set = ONLY_LETTERS
-                break
-            elif user_input == '0':
-                char_set = ONLY_NUMBERS
-                break
-            else:
-                print("Invalid option.")
-
-        secure_password = get_random_string(length, allowed_chars=char_set)
-        print(f"Password generated: {secure_password}")
-        secure_password_entropy = entropy(list(secure_password), 2)
-        secure_password_max_entropy = entropy_ideal(length, 2)
-        secure_password_ratio = 100*secure_password_entropy/secure_password_max_entropy
-        print(f"Entropy: {secure_password_entropy} shannons")
-        print(
-            f"Maximum possible Shannon entropy: {secure_password_max_entropy}")
-        print(f"Entropy ratio: {round(secure_password_ratio, 2)}%")
-        if length < 8:
-            print("Warning: this password length is under 8 characters!")
+    secure_password = get_random_string(length, allowed_chars=char_set)
+    secure_password_entropy = entropy(list(secure_password), 2)
+    secure_password_max_entropy = entropy_ideal(length, 2)
+    secure_password_ratio = 100*secure_password_entropy/secure_password_max_entropy
+    #if length < 8:
+    #    raise Exception("Warning: this password length is under 8 characters!")
+    return secure_password #, secure_password_entropy, secure_password_max_entropy, secure_password_ratio
 
 
 def verify_password():
