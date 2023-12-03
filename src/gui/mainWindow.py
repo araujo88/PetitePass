@@ -131,10 +131,14 @@ class MainWindow(QWidget):
         button = self.table.cellWidget(row, 5)
         if button.text() == 'Show':
             button.setText('Hide')
-            self.table.setItem(row, 2, QTableWidgetItem(password.password))  # Show actual password
+            passwordItem = QTableWidgetItem(password.password)
+            passwordItem.setFlags(passwordItem.flags() ^ Qt.ItemIsEditable)
+            self.table.setItem(row, 2, passwordItem)
         else:
             button.setText('Show')
-            self.table.setItem(row, 2, QTableWidgetItem('*' * len(password.password)))  # Hide password
+            passwordItem = QTableWidgetItem('*' * len(password.password))
+            passwordItem.setFlags(passwordItem.flags() ^ Qt.ItemIsEditable)
+            self.table.setItem(row, 2, passwordItem)
 
     def contextMenuEvent(self, event):
         contextMenu = QMenu(self)
