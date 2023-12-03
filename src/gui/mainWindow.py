@@ -91,6 +91,8 @@ class MainWindow(QWidget):
         # Clear existing data
         self.table.clearContents()
         self.table.setRowCount(0)
+        self.table.setColumnCount(6)  # Assuming 5 columns already exist, add 1 for buttons
+        self.table.setHorizontalHeaderLabels(["Name", "Username", "Password", "Created", "Updated", "Visibility"])
 
         # Fetch data from the database
         passwords = Password.select()  # assuming this fetches data from your database
@@ -98,9 +100,25 @@ class MainWindow(QWidget):
             self.table.insertRow(row)
             self.table.setItem(row, 0, QTableWidgetItem(password.name))
             self.table.setItem(row, 1, QTableWidgetItem(password.username))
-            self.table.setItem(row, 2, QTableWidgetItem(password.password))
+            self.table.setItem(row, 2, QTableWidgetItem('*' * len(password.password)))  # Masked password
             self.table.setItem(row, 3, QTableWidgetItem(str(password.timestamp)))
             self.table.setItem(row, 4, QTableWidgetItem(str(password.updated)))
+            self.addPasswordButton(row, password)
+
+    def addPasswordButton(self, row, password):
+        button = QPushButton('Show', self)
+        button.clicked.connect(lambda: self.togglePasswordVisibility(row, password))
+        self.table.setCellWidget(row, 5, button)  # Add button to the 6th column
+
+    def togglePasswordVisibility(self, row, password):
+        # Logic to toggle password visibility
+        button = self.table.cellWidget(row, 5)
+        if button.text() == 'Show':
+            button.setText('Hide')
+            self.table.setItem(row, 2, QTableWidgetItem(password.password))  # Show actual password
+        else:
+            button.setText('Show')
+            self.table.setItem(row, 2, QTableWidgetItem('*' * len(password.password)))  # Hide password
 
     def contextMenuEvent(self, event):
         contextMenu = QMenu(self)
