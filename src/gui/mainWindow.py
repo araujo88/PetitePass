@@ -98,11 +98,27 @@ class MainWindow(QWidget):
         passwords = Password.select()  # assuming this fetches data from your database
         for row, password in enumerate(passwords):
             self.table.insertRow(row)
-            self.table.setItem(row, 0, QTableWidgetItem(password.name))
-            self.table.setItem(row, 1, QTableWidgetItem(password.username))
-            self.table.setItem(row, 2, QTableWidgetItem('*' * len(password.password)))  # Masked password
-            self.table.setItem(row, 3, QTableWidgetItem(str(password.timestamp)))
-            self.table.setItem(row, 4, QTableWidgetItem(str(password.updated)))
+
+            nameItem = QTableWidgetItem(password.name)
+            nameItem.setFlags(nameItem.flags() ^ Qt.ItemIsEditable)
+            self.table.setItem(row, 0, nameItem)
+            
+            usernameItem = QTableWidgetItem(password.username)
+            usernameItem.setFlags(usernameItem.flags() ^ Qt.ItemIsEditable)
+            self.table.setItem(row, 1, usernameItem)
+
+            passwordItem = QTableWidgetItem('*' * len(password.password))
+            passwordItem.setFlags(passwordItem.flags() ^ Qt.ItemIsEditable)
+            self.table.setItem(row, 2, passwordItem)
+
+            timestampItem = QTableWidgetItem(str(password.timestamp))
+            timestampItem.setFlags(timestampItem.flags() ^ Qt.ItemIsEditable)
+            self.table.setItem(row, 3, timestampItem)
+
+            updatedItem = QTableWidgetItem(str(password.updated))
+            updatedItem.setFlags(updatedItem.flags() ^ Qt.ItemIsEditable)
+            self.table.setItem(row, 4, updatedItem)
+
             self.addPasswordButton(row, password)
 
     def addPasswordButton(self, row, password):

@@ -24,13 +24,7 @@ class PasswordManagerApp(QMainWindow):
         self.mainWindow = MainWindow()
         self.setCentralWidget(self.mainWindow)
         self.setGeometry(300, 300, 800, 600)
-        self.setWindowTitle('Password Manager')
-        self.show()
-
-    def setupMainWindow(self):
-        self.statusBar().showMessage('Ready')
-        self.setGeometry(300, 300, 800, 600)
-        self.setWindowTitle('Password Manager')    
+        self.setWindowTitle('PetitePass')
         self.show()
 
 
