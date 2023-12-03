@@ -69,7 +69,7 @@ class CreatePasswordDialog(QDialog):
 
         # If all checks pass, hash the password and create the database
         hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-        path = f"/home/{getpass.getuser()}/password-manager"
+        path = f"/home/{getpass.getuser()}/PetitePass"
         try:
             # Write the hashed password to your password file
             # Set up your database

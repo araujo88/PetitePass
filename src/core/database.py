@@ -75,7 +75,7 @@ def delete_password():
 
 
 def change_db_password():
-    path = f"/home/{getpass.getuser()}/password-manager"
+    path = f"/home/{getpass.getuser()}/PetitePass"
     if not os.path.exists(path):
         os.makedirs(path)
 

@@ -29,7 +29,7 @@ class AuthDialog(QDialog):
         self.buttons = QPushButton('Login', self)
         self.buttons.clicked.connect(self.handleLogin)
         layout.addWidget(self.buttons)
-        path = f"/home/{getpass.getuser()}/password-manager"
+        path = f"/home/{getpass.getuser()}/PetitePass"
         if not os.path.exists(path):
             os.makedirs(path)        
         checkpath = path + "/48cccca3bab2ad18832233ee8dff1b0b.db"
@@ -40,7 +40,7 @@ class AuthDialog(QDialog):
             self.handleNewPasswordCreation(checkpath, passwd_path)        
 
     def handleLogin(self):
-        path = f"/home/{getpass.getuser()}/password-manager"
+        path = f"/home/{getpass.getuser()}/PetitePass"
         checkpath = path + "/48cccca3bab2ad18832233ee8dff1b0b.db"
         passwd_path = path + "/5f4dcc3b5aa765d61d8327deb882cf99"
 
@@ -58,7 +58,7 @@ class AuthDialog(QDialog):
             QMessageBox.warning(self, "Error", "Password creation was cancelled or failed.")
 
     def authenticateUser(self, checkpath, passwd_path):
-        path = f"/home/{getpass.getuser()}/password-manager"        
+        path = f"/home/{getpass.getuser()}/PetitePass"        
         password_input = self.passwordField.text()
         password = str.encode(password_input)
         passwd_path = path + "/5f4dcc3b5aa765d61d8327deb882cf99"

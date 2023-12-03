@@ -72,7 +72,7 @@ class ModifyMasterPasswordDialog(QDialog):
 
         # If all checks pass, hash the password and create the database
         hashed = bcrypt.hashpw(current_password.encode(), bcrypt.gensalt())
-        path = f"/home/{getpass.getuser()}/password-manager"
+        path = f"/home/{getpass.getuser()}/PetitePass"
         try:
             passwd_path = path + "/5f4dcc3b5aa765d61d8327deb882cf99"
             f = open(passwd_path)

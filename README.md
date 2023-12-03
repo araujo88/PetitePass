@@ -1,4 +1,4 @@
-# password-manager
+# PetitePass
 
 A lightweight terminal-based password manager coded with Python using SQLCipher for SQLite database encryption.
 
@@ -17,10 +17,6 @@ Python 3.10 <br>
 `make install-requirements` <br>
 `make build` <br>
 `sudo make install` <br>
-
-To start the application, run with `sudo`:
-
-`sudo password-manager`
 
 ## Usage
 
