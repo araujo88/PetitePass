@@ -46,7 +46,10 @@ class CheckPasswordDialog(QDialog):
         self.maxShannonEntropyLabel.setText("Maximum Shannon entropy: " + str(max_entropy))
         self.entropyRatioLabel.setText("Entropy ratio: " + f"{round(ratio, 2)}%")
 
-        if len(password_check) < 8:
+        if (check_if_password_is_common(password_check, "../10k-most-common.txt")):
+            QMessageBox.warning(self, "Warning", "The password is too common.")
+            return
+        elif len(password_check) < 8:
             QMessageBox.warning(self, "Warning", "The length is under 8 characters. The password is weak.")
             return
         elif any(i in SPECIAL_CHARS for i in password_check) == False:

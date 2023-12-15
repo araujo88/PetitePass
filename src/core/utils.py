@@ -113,3 +113,11 @@ def cls():
 def check_privileges():
     if not os.environ.get("SUDO_UID") and os.geteuid() != 0:
         exit("You need to run this script with sudo or as root.")
+
+def check_if_password_is_common(password:str, file: str) -> bool:
+    with open(file) as f:
+        lines = f.readlines()
+        for line in lines:
+            if password == line.replace("\n",""):
+                return True
+    return False

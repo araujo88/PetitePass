@@ -55,7 +55,10 @@ class ModifyMasterPasswordDialog(QDialog):
         input_ideal_entropy = entropy_ideal(len(password), 10)
         entropy_ratio = 100*input_entropy/input_ideal_entropy
 
-        if len(password) < 8:
+        if (check_if_password_is_common(password, "../10k-most-common.txt")):
+            QMessageBox.warning(self, "Error", "Your password is too common")
+            return
+        elif len(password) < 8:
             QMessageBox.warning(self, "Error", "Your password must be at least 8 characters long")
             return
         elif any(i in SPECIAL_CHARS for i in password) == False:
