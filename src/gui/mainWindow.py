@@ -1,7 +1,9 @@
+import pyperclip
+import subprocess
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, qApp, QMessageBox,
                              QPushButton, QVBoxLayout, QWidget, QLabel, QLineEdit, QTableWidget,
                              QTableWidgetItem, QDialog, QFormLayout, QComboBox, QStyleFactory, QMenu)
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer, pyqtSignal, QThread
 from gui.passwordDialog import PasswordDialog
 from gui.generatePasswordDialog import GeneratePasswordDialog
 from gui.checkPasswordDialog import CheckPasswordDialog
@@ -14,9 +16,15 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+        self.copied_password = None
 
     def initUI(self):
         layout = QVBoxLayout(self)
+
+        # Set up the QTimer
+        self.timer = QTimer(self)
+        self.timer.setSingleShot(True)  # The timer will only run once per start
+        self.timer.timeout.connect(self.clear_clipboard)
 
         # Password Table
         self.table = QTableWidget(self)
@@ -28,41 +36,13 @@ class MainWindow(QWidget):
         for i in range(self.table.columnCount()):
             headerItem = QTableWidgetItem(self.table.horizontalHeaderItem(i).text())
             headerItem.setTextAlignment(Qt.AlignHCenter)
-            self.table.setHorizontalHeaderItem(i, headerItem)        
+            self.table.setHorizontalHeaderItem(i, headerItem)
 
-        # Buttons
-        # self.addButton = QPushButton('Add Password', self)
-        # self.addButton.clicked.connect(self.addPassword)
-        # layout.addWidget(self.addButton)
-
-        # self.addButton = QPushButton('Update password', self)
-        # self.addButton.clicked.connect(self.updatePassword)
-        # layout.addWidget(self.addButton)
-
-        # self.addButton = QPushButton('Delete password', self)
-        # self.addButton.clicked.connect(self.deletePassword)
-        # layout.addWidget(self.addButton)
-
-        # self.addButton = QPushButton('Generate password', self)
-        # self.addButton.clicked.connect(self.generatePassword)
-        # layout.addWidget(self.addButton)
-
-        # self.addButton = QPushButton('Check password strength', self)
-        # self.addButton.clicked.connect(self.checkPasswordStrength)
-        # layout.addWidget(self.addButton)        
-
-        # self.addButton = QPushButton('Modify master password', self)
-        # self.addButton.clicked.connect(self.addPassword)
-        # layout.addWidget(self.addButton)                  
-
-        # Add other buttons and connect them to respective functions
-        # ...
         self.populatePasswordTable()
 
     def checkPasswordStrength(self):
         checkPasswordDialog = CheckPasswordDialog(self)
         checkPasswordDialog.exec_()  # This will display the dialog
-
 
     def addPassword(self):
         dialog = PasswordDialog(self)
@@ -128,9 +108,13 @@ class MainWindow(QWidget):
         self.table.setCellWidget(row, 6, copyButton)  # Adjust the index for your table
 
     def copyToClipboard(self, password):
-        clipboard = QApplication.clipboard()
-        clipboard.setText(password)
+        QApplication.clipboard().setText(password)
+        self.copied_password = password
         QMessageBox.information(self, "Copied", "Password copied to clipboard!")
+        self.timer.start(3000)
+
+    def clear_clipboard(self):
+        subprocess.run('xsel -bc', shell=True, check=True)
 
     def addPasswordButton(self, row, password):
         button = QPushButton('Show', self)
