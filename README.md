@@ -16,6 +16,7 @@ A simple and secure lightweight password manager coded with Python using SQLCiph
 ## Requirements
 
 Python 3.10
+xsel
 
 ## Installing from source
 
@@ -85,4 +86,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Write unit tests
 - Allow user to edit password directly on the table
 - Generate backup
-- Check if password is leaked/common

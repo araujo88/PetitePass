@@ -6,6 +6,8 @@ install-requirements:
 
 build:
 	pyinstaller --onefile --paths=/env/Lib/site-packages src/main.py
+	mv dist/main dist/petitepass
+	cp dist/petitepass petitepass_package/bin/petitepass
 
 install:
 	mkdir /opt/PetitePass && cp dist/PetitePass /usr/bin/PetitePass

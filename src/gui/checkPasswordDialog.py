@@ -41,12 +41,13 @@ class CheckPasswordDialog(QDialog):
         entropy_check = entropy(list(password_check), 10)
         max_entropy = entropy_ideal(len(password_check), 10)
         ratio = 100*entropy_check/max_entropy
+        
         self.passwordLengthLabel.setText("Password length: " + str(len(password_check)))
         self.shannonEntropyLabel.setText("Shannon entropy: " + str(entropy_check))
         self.maxShannonEntropyLabel.setText("Maximum Shannon entropy: " + str(max_entropy))
         self.entropyRatioLabel.setText("Entropy ratio: " + f"{round(ratio, 2)}%")
 
-        if (check_if_password_is_common(password_check, "../10k-most-common.txt")):
+        if (check_if_password_is_common(password_check, "/usr/share/10k-most-common.txt")):
             QMessageBox.warning(self, "Warning", "The password is too common.")
             return
         elif len(password_check) < 8:

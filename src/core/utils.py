@@ -115,9 +115,13 @@ def check_privileges():
         exit("You need to run this script with sudo or as root.")
 
 def check_if_password_is_common(password:str, file: str) -> bool:
-    with open(file) as f:
-        lines = f.readlines()
-        for line in lines:
-            if password == line.replace("\n",""):
-                return True
+    try:
+        with open(file) as f:
+            lines = f.readlines()
+            for line in lines:
+                if password == line.replace("\n",""):
+                    return True
+    except FileNotFoundError as e:
+        print(e)
+        return False
     return False

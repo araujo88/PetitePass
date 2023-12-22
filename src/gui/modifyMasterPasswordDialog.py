@@ -55,7 +55,7 @@ class ModifyMasterPasswordDialog(QDialog):
         input_ideal_entropy = entropy_ideal(len(password), 10)
         entropy_ratio = 100*input_entropy/input_ideal_entropy
 
-        if (check_if_password_is_common(password, "../10k-most-common.txt")):
+        if (check_if_password_is_common(password, "/usr/share/10k-most-common.txt")):
             QMessageBox.warning(self, "Error", "Your password is too common")
             return
         elif len(password) < 8:

@@ -134,3 +134,5 @@ dmypy.json
 SQLCipher_test
 
 Tests
+
+*.deb

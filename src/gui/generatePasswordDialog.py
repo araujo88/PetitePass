@@ -38,6 +38,7 @@ class GeneratePasswordDialog(QDialog):
         try:
             selectedText = self.charsetCombo.currentText()
             self.generatedPasswordBox.setText(generate_password(selectedText, int(self.lengthField.text())))
+        except ValueError as e:
+            QMessageBox.warning(self, "Error", "The length cannot be empty.")
         except Exception as e:
-            print(e)
             QMessageBox.warning(self, "Error", str(e))
